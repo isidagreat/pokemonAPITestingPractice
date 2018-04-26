@@ -1,0 +1,15 @@
+/*reset CSS*/
+*{
+	margin:0px;
+	padding: 0px;
+
+}
+#KantoRegionPokemon{
+	width: auto;
+	background: pink;
+}
+
+#kantoRegionPokemon img{
+	width: 20px;
+	height: 20px;
+}

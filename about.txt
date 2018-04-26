@@ -1,0 +1,1 @@
+This projects contains API practice code. Where we attempt to display the first 151 pokemon.
