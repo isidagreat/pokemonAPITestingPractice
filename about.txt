@@ -1,1 +1,2 @@
 This projects contains API practice code. Where we attempt to display the first 151 pokemon.
+This project will turn into a full blown pokedex and dis play pokemons info;
