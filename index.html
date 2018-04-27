@@ -8,23 +8,72 @@
 	<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
 	<script>
 		$(document).ready(function(){
-			var pokemonPic=[];
-			var pokeonName=[];
-			for (var i = 1; i<152; i++) {
-				var pokeURL="http://pokeapi.salestock.net/api/v2/pokemon/"+i;
-				$ .get(pokeURL, function(data){
-					var imageURI = data.sprites.front_default;
-					pokemonPic.push(imageURI);
-					var name= data.name;
-					pokeonName.push(name);
-					$("#KantoRegionPokemon").append("<img src="+imageURI+" alt="+name+">");
-				});
+			var holder = [];
 
+			for (var i = 700; i<710; i++) {
+					var pokeURL="https://pokeapi.co/api/v2/pokemon/"+i+"/";
+					holder.push(pokeURL);
+				// console.log(i);
 			}
-			// for (var j = 1; j<152;j++){
-			// 	$("#KantoRegionPokemon").append("<img src="+pokemonPic[j]+" alt="+pokeonName[j]+">");
-			// }
+			for(var i=0; i<11;i++){
+				$ .getJSON(holder[i], function(data){
+					console.log(data.name);
+
+
+
+
+					var imageURI = data.sprites.front_default;
+					 var name= data.name;
+					 var index= data.id;
+					 var type1= data.types[0].type.name;
+					 var type2="none";
+					 if(data.types.length==2){
+					 type2=data.types[1].type.name;
+					}
+					// // var type=data.types[1].type.name;
+					
+					// // if(data.types.type.name===2){
+					// // 	var typ2=data.types[1].type.name;
+					// // }
+					// // var typ2="grass";
+					// // var typ2="poison";
+					var height=data.height;
+					var weights=data.weight;
+					$("#KantoRegionPokemon").append("<img src="+imageURI+" id="+index+" name="+name+" type="+type1+" type1="+type2+" heights="+height+" weight="+weights+">");
 				
+				});
+			}
+			
+
+
+
+			$(document).on("click", "img", function(){
+				var newSrc = $(this).attr("src");
+				var newheight = $(this).attr("heights");
+				var type1 = $(this).attr("type");
+				var type2=$(this).attr("type1")
+				var newWheight = $(this).attr("weight");
+				var name1 = $(this).attr("name");
+				$("#pokedex").empty();
+				console.log(newSrc);
+				$("#pokedex").append("<h3>"+name1+"</h3>")
+				$("#pokedex").append("<img src="+newSrc+">");
+				$("#pokedex").append("<h5>Types:</h5>");
+				$("#pokedex").append("<ul><li>"+type1+"</><br><li>"+type2+"</li></ul>");
+				$("#pokedex").append("<h5>Height:</h5>");
+				$("#pokedex").append("<p>"+newheight+"</p>")
+				$("#pokedex").append("<h5>Weight:</h5>");
+				$("#pokedex").append("<p>"+newWheight+"</p>")
+
+
+				});
+				
+			// $("#pokedex img").click("click", "img", function(){
+			// 	var newSrc = $(this).data("src");
+			// 	$("#pokedex").empty();
+			// 	console.log(newSrc);
+			// 	$("#pokedex").append("<img src="+temp+">");
+			// 	$("#pokedex").append("<p>we did it </p>");
 			});
 			
 		
@@ -32,7 +81,17 @@
 
 </head>
 <body>
-	<div id="KantoRegionPokemon">
+	<!-- This will hold the contents of the website -->
+	<div id="wrapper">
+		<!-- This will hold the pokemon pictures -->
+		<div id="KantoRegionPokemon">
+		</div>
+		<!-- This will contain the pokedex area that will display the pokemon, type, height and weight -->
+		<div id="pokedex">
+
+			
+		</div>
+
 	</div>
 
 
